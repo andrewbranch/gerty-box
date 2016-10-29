@@ -1,0 +1,1 @@
+cp /data/gerty-machine/hubot/.env `dirname $0`/
