@@ -1,5 +1,6 @@
 machine-deployer:
   image: andrewbranch/machine-deployer:2.0.0
+  container_name: machine-deployer
   volumes:
     - /srv/docker/machine-deployer:/data
 redis:
