@@ -1,0 +1,13 @@
+machine-deployer:
+  image: andrewbranch/machine-deployer:1.1.0
+  volumes:
+    - /srv/docker/machine-deployer:/data
+redis:
+  image: redis:latest
+  command: redis-server --appendonly yes
+  volumes:
+    - /srv/docker/redis:/data
+hubot:
+  build: hubot
+  links:
+    - redis

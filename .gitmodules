@@ -1,0 +1,3 @@
+[submodule "hubot/gerty"]
+	path = hubot/gerty
+	url = git@github.com:fumc-pensacola/gerty
