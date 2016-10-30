@@ -12,3 +12,15 @@ hubot:
   build: hubot
   links:
     - redis
+mongo:
+  image: mongo:latest
+  volumes:
+    - /srv/docker/mongo:/data
+uptime:
+  image: hans00/uptime:latest
+  ports:
+    - 8082:8082
+  links:
+    - mongo
+  environment:
+    - MONGO_HOST_PORT=mongo:27017
