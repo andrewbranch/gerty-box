@@ -24,3 +24,12 @@ uptime:
     - mongo
   environment:
     - MONGO_HOST_PORT=mongo:27017
+nginx:
+  build: nginx
+  ports:
+    - 80:80
+    - 443:443
+  environment:
+    - UPTIME_PORT=8082
+  volumes:
+    - /etc/letsencrypt/live:/data
