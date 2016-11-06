@@ -1,35 +1,29 @@
-machine-deployer:
-  image: andrewbranch/machine-deployer:2.0.0
-  container_name: machine-deployer
-  volumes:
-    - /srv/docker/machine-deployer:/data
-redis:
-  image: redis:latest
-  command: redis-server --appendonly yes
-  volumes:
-    - /srv/docker/redis:/data
-hubot:
-  build: hubot
-  links:
-    - redis
-mongo:
-  image: mongo:latest
-  volumes:
-    - /srv/docker/mongo:/data
-uptime:
-  image: hans00/uptime:latest
-  ports:
-    - 8082:8082
-  links:
-    - mongo
-  environment:
-    - MONGO_HOST_PORT=mongo:27017
-nginx:
-  build: nginx
-  ports:
-    - 80:80
-    - 443:443
-  environment:
-    - UPTIME_PORT=8082
-  volumes:
-    - /etc/letsencrypt/live:/data
+version: '2'
+services:
+  machine-deployer:
+    image: andrewbranch/machine-deployer:2.0.0
+    container_name: machine-deployer
+    volumes:
+      - /srv/docker/machine-deployer:/data
+  redis:
+    image: redis:latest
+    command: redis-server --appendonly yes
+    volumes:
+      - /srv/docker/redis:/data
+  hubot:
+    build: hubot
+    links:
+      - redis
+  nginx:
+    build:
+      context: nginx
+      args:
+        - UPTIME_PORT=8082
+        - GERTY_PORT=8080
+    links:
+      - uptime
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt:/data
