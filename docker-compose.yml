@@ -12,6 +12,8 @@ services:
       - /srv/docker/redis:/data
   hubot:
     build: hubot
+    ports:
+      - 8080:8080
     links:
       - redis
   nginx:

@@ -14,5 +14,8 @@ COPY gerty .
 RUN mv /var/tmp/node_modules ./
 COPY .env .env
 
+# Allow HTTP access from proxy
+EXPOSE 8080
+
 # Start the app
 CMD ["bin/hubot", "-a", "slack"]
