@@ -9,7 +9,6 @@ ARG GERTY_PORT
 # Copy server configuration and sites
 COPY gertybox-server /etc/nginx
 RUN mkdir sites-available && \
-    envsubst '\$UPTIME_PORT' < uptime.wheream.io.template > sites-available/uptime.wheream.io && \
     envsubst '\$GERTY_PORT' < gerty.wheream.io.template > sites-available/gerty.wheream.io
 
 # Make and link sites_enabled  
